@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import AnimatedRoutes from './components/routes/animatedRoutes'
 
 function App() {
-      return <BrowserRouter>
+      return <BrowserRouter basename='/orange-app'>
             <AnimatedRoutes />
       </BrowserRouter> 
 }
