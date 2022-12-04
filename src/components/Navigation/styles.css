@@ -3,37 +3,24 @@
     top: 0;
     left: 0;
     overflow: hidden;
-    background-color: #aae;
+    background-color: hsl(38, 94%, 66%);
     height: 100vh;
     width: 100vw;
-    z-index: 5;
+    /* z-index: 5; */
     transition: opacity 500ms ease;
+    transform-style: preserve-3d;
 }
 
-.window{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1em;
-    width: calc(100% - 2em);
-    height: calc(100% - 2em);
-    overflow:hidden;
-}
-
-.link-container{
-    position: relative;
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 15em;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
-    width: fit-content;
-    height: 100%;
+.title{
+    text-align: center;
+    font-size: 5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    z-index: 1;
 }
 
 .item{
+    position: relative;
     list-style: none;
     border: 1px dotted #025;
     height: 20em;

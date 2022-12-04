@@ -1,57 +1,53 @@
-import IconButton from "components/Buttons/iconButton";
-import { AnimatePresence, DragControls, motion, useDragControls, useMotionValue } from "framer-motion";
+import BasicLayoutPage from "components/layout/basicLayoutPage";
+import Carrousel from "components/panCarrousel/carrousel";
+import { motion, useInView } from "framer-motion";
 import { ROUTES } from "misc/const";
 import useDimensions from "misc/hooks/useDimension";
-import About from "pages/about";
-import Contact from "pages/contact";
-import Home from "pages/home";
-import { EventHandler, HtmlHTMLAttributes, MouseEventHandler, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import useStateRef from "misc/hooks/useStateRef";
+import { getTransition } from "misc/utils";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import ComponentLink from "./componentLink";
 import './styles.css'
 
 const Nav = () => {
-    const { width } = useDimensions()
-    const isMobile = width < 920
-    const containerRef = useRef<HTMLDivElement>(null)
-    const [draggerRef,setDraggerRef] = useState<HTMLUListElement>()
-    const lastX = useMemo(()=> Number(localStorage.getItem('last-drag-x')) || 0,[])    
+    const ITEMSWIDTH = 12
+    const ITEMSHEIGHT = 20
 
-    const handleDragger = useCallback((node:HTMLUListElement) => {
-        if(node)
-        setDraggerRef(node)
-    },[])
+    const {componentRef, handleRef} = useStateRef()
+    const lastX = useMemo(()=> (Number(localStorage.getItem('last-drag-x'))),[])
 
     const handleNav = ()=> {            
-        if(draggerRef){
+        if(componentRef){
             // get translation in x
-            const style = window.getComputedStyle(draggerRef);
-            const matrix = new WebKitCSSMatrix(style.transform);
-            const posX = matrix.m41
+            const posX = getTransition(componentRef)
             localStorage.setItem('last-drag-x', posX.toString()) 
         }
     }
 
     return ( 
-        <motion.nav className="navigation">
-            <div
-            className="window" ref={containerRef} >
+        <nav className="navigation">
+            <h1 className="title">Welcome to Orange App</h1>
 
-                <motion.ul drag={isMobile && 'x'} whileTap={{ cursor: isMobile ? "grabbing" : 'auto' }} 
-                initial={{x:lastX}}
-                  dragConstraints={containerRef} ref={handleDragger}
-                  className="link-container">
-                    {Object.entries(ROUTES).map(([key,value])=>
-                    <motion.li className="item" key={key} id={key} layoutId={key}>
-                        <Link className="link" to={`/${key}`} onClick={handleNav}>
-                            <div className="page-preview">
-                                {value}
-                            </div>
-                        </Link>
-                    </motion.li>
+            <Carrousel  ref={handleRef} initialPos={lastX} columnWidth={`${ITEMSWIDTH}em`} >
+
+                    {Object.entries(ROUTES).map(([location, component])=>
+                    <BasicLayoutPage className="item" id={location} layoutId={location}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{margin:`-${ITEMSWIDTH*16}px`}} 
+                    variants={{
+                        visible:{height:`${ITEMSHEIGHT}em`, opacity: 1},
+                        hidden:{height:`${ITEMSHEIGHT - 5}em`, opacity:.8}
+                    }}
+                    >
+                        <ComponentLink location={location} handleClick={handleNav}>
+                            {component}
+                        </ComponentLink>
+                    </BasicLayoutPage>
                         )}
-                </motion.ul>
-            </div>
-        </motion.nav> 
+            </Carrousel>
+        </nav> 
     );
 }
  

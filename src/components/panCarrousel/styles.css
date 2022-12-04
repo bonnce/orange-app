@@ -1,0 +1,22 @@
+.draggable{
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 15em;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    width: fit-content;
+}
+
+.window{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 1em;
+    width: calc(100% - 2em);
+    height: calc(100% - 2em);
+    overflow:hidden;
+    z-index: 2;
+}

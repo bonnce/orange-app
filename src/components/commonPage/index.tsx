@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 import './styles.css'
 
 interface iCommonPage {
@@ -8,8 +8,7 @@ interface iCommonPage {
 
 const CommonPage = (props:iCommonPage) => {
     const {title} = props
-    const location = useLocation().pathname.replace('/','')
-    return ( <motion.div className="common" layoutId={location}
+    return ( <div className="common"
     //motion  
         // initial={{opacity:0 }}
         // animate={{opacity:1}}
@@ -18,7 +17,7 @@ const CommonPage = (props:iCommonPage) => {
     >
                 <Link to="/">Menu</Link>
         <h1>{title}</h1>
-    </motion.div> );
+    </div> );
 }
  
 export default CommonPage;

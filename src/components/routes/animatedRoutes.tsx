@@ -1,22 +1,25 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "pages/home";
-import About from "pages/about";
-import Contact from "pages/contact";
-import { AnimatePresence } from "framer-motion"
 import Nav from "components/Navigation/nav";
 import { ROUTES } from "misc/const";
+import BasicLayoutPage from "components/layout/basicLayoutPage";
+import { AnimatePresence } from "framer-motion";
 
 const AnimatedRoutes = () => {
     const location  = useLocation()
     return (
-    // <AnimatePresence>
+        <AnimatePresence mode="popLayout">
+
         <Routes location={location} key={location.pathname}>
             <Route path="/" index element={ <Nav /> } />
             {Object.entries(ROUTES).map(([location, component])=>
-            <Route key={location} path={`/${location}`} element={ component } />
+            <Route key={location} path={`/${location}`} element={ 
+                <BasicLayoutPage id={location} >   
+                {component} 
+                </BasicLayoutPage>
+            } />
             )}
         </Routes>
-    // </AnimatePresence>
+            </AnimatePresence>
     )
 }
  
