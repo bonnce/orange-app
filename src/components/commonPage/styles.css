@@ -5,4 +5,23 @@
     width: 100%;
     min-height: 100%;
     background-color: #f5d;
+    text-align: center;
+}
+
+.title-page{
+    font-size: 5em;
+}
+
+.menu-button{
+    position: absolute;
+    top:2px;
+    left: 2px;
+    padding: .5em;
+    height: 3em;
+    width: 3em;
+    font-size: 1.5em;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
 }
