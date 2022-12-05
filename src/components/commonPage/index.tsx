@@ -1,8 +1,8 @@
 import IconButton from "components/Buttons/iconButton"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import './styles.css'
 import orange from 'assets/orange.svg'
-import { AnimatePresence, Variants } from "framer-motion"
+import {  Variants } from "framer-motion"
 import { useState } from "react"
 import { timer } from "misc/utils"
 
@@ -21,8 +21,9 @@ const CommonPage = (props:iCommonPage) => {
     const variants:Variants = {
         drop:{
         position:'absolute',
-        rotate:[null,15,-5],
+        rotate:[null,15],
         y:'100vh',
+        opacity:0,
         transition:{duration:.5 }
     }}
     const {title} = props
@@ -30,12 +31,13 @@ const CommonPage = (props:iCommonPage) => {
             <IconButton className="menu-button" imgAlt="orange-menu" 
             whileHover={{
                 rotate:[null,15,-5],
+                cursor:'pointer',
                 transition:{repeat:Infinity, repeatType:'mirror', duration:.5, repeatDelay:.1}
             }}
             variants={variants}
             animate={drop && 'drop' }
             imgSrc={orange} 
-            onClick={handleClick} />
+            onClick={handleClick}/>
         <h1 className="title-page">{title}</h1>
     </div> );
 }

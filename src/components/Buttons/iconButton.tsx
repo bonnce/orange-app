@@ -11,7 +11,7 @@ const IconButton = (props: iIconButton ) => {
     return ( 
         <motion.button {...restProps} >
             {children}
-            <img src={imgSrc} alt={imgAlt} />
+            <img src={imgSrc} alt={imgAlt} style={{width:'100%', height:'100%'}} />
         </motion.button>
      );    
 }

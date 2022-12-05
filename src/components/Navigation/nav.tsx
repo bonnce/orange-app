@@ -13,10 +13,14 @@ import './styles.css'
 const Nav = () => {
     const ITEMSWIDTH = 12
     const ITEMSHEIGHT = 20
-
+    const {width} = useDimensions()
     const {componentRef, handleRef} = useStateRef()
     const lastX = useMemo(()=> (Number(localStorage.getItem('last-drag-x'))),[])
-
+    const margin = useMemo(()=> {
+        const em = ITEMSWIDTH * 16
+        return em > width /2  ? em / 2 : em  
+    },[width])
+console.log(margin)
     const handleNav = ()=> {            
         if(componentRef){
             // get translation in x
@@ -35,7 +39,7 @@ const Nav = () => {
                     <BasicLayoutPage className="item" id={location} layoutId={location}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{margin:`-${ITEMSWIDTH*16}px`}} 
+                    viewport={{margin:`-${margin}px`}} 
                     variants={{
                         visible:{height:`${ITEMSHEIGHT}em`, opacity: 1},
                         hidden:{height:`${ITEMSHEIGHT - 5}em`, opacity:.8}
