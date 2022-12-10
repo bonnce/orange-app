@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
+import { LazyExoticComponent, ReactNode } from "react";
 
 export interface iComponents {
-    [k:string]:ReactNode
+    [k:string]:LazyExoticComponent
 }

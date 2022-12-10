@@ -1,12 +1,10 @@
-import About from "pages/about";
-import Contact from "pages/contact";
-import Extra from "pages/extra";
-import Home from "pages/home";
+import { lazy } from "react";
 import { iComponents } from "./type";
 
 export const ROUTES:iComponents = {
-    'home':<Home/>,
-    'about':<About/>,
-    'contact':<Contact/>,
-    'extra':<Extra/>,
+
+    'home':lazy(()=> import('pages/home')),
+    'about':lazy(()=> import('pages/about')),
+    'contact':lazy(()=> import('pages/contact')),
+    'extra':lazy(()=> import('pages/extra')),
 }

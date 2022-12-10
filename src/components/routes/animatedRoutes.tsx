@@ -3,6 +3,7 @@ import Nav from "components/Navigation/nav";
 import { ROUTES } from "misc/const";
 import BasicLayoutPage from "components/layout/basicLayoutPage";
 import { AnimatePresence } from "framer-motion";
+import LoadComponent from "components/lazyLoad";
 
 const AnimatedRoutes = () => {
     const location  = useLocation()
@@ -14,7 +15,7 @@ const AnimatedRoutes = () => {
             {Object.entries(ROUTES).map(([location, component])=>
             <Route key={location} path={`/${location}`} element={ 
                 <BasicLayoutPage id={location} >   
-                {component} 
+                {LoadComponent(component)} 
                 </BasicLayoutPage>
             } />
             )}

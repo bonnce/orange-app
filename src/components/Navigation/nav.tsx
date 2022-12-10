@@ -1,11 +1,12 @@
 import BasicLayoutPage from "components/layout/basicLayoutPage";
+import LoadComponent from "components/lazyLoad";
 import Carrousel from "components/panCarrousel/carrousel";
 import { motion, useInView } from "framer-motion";
 import { ROUTES } from "misc/const";
 import useDimensions from "misc/hooks/useDimension";
 import useStateRef from "misc/hooks/useStateRef";
 import { getTransition } from "misc/utils";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useMemo, useRef, useState, LazyExoticComponent, ReactNode, lazy } from "react";
 import { Link } from "react-router-dom";
 import ComponentLink from "./componentLink";
 import './styles.css'
@@ -29,6 +30,8 @@ console.log(margin)
         }
     }
 
+
+
     return ( 
         <nav className="navigation">
             <h1 className="title">Welcome to Orange App</h1>
@@ -38,6 +41,7 @@ console.log(margin)
                     {Object.entries(ROUTES).map(([location, component])=>
                     <BasicLayoutPage className="item" id={location} layoutId={location}
                     initial="hidden"
+                    key={location}
                     whileInView="visible"
                     viewport={{margin:`-${margin}px`}} 
                     variants={{
@@ -45,9 +49,11 @@ console.log(margin)
                         hidden:{height:`${ITEMSHEIGHT - 5}em`, opacity:.8}
                     }}
                     >
+                            {/* <Suspense fallback={<div>loading...</div>} > */}
                         <ComponentLink location={location} handleClick={handleNav}>
-                            {component}
+                            {LoadComponent(component)} 
                         </ComponentLink>
+                            {/* </Suspense> */}
                     </BasicLayoutPage>
                         )}
             </Carrousel>
