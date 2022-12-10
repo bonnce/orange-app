@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom"
 import './styles.css'
 import orange from 'assets/orange.svg'
 import {  Variants } from "framer-motion"
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 import { timer } from "misc/utils"
 
 interface iCommonPage {
-    title:string
+    title:string,
+    children?:ReactNode
 }
 
 const CommonPage = (props:iCommonPage) => {
@@ -26,7 +27,7 @@ const CommonPage = (props:iCommonPage) => {
         opacity:0,
         transition:{duration:.5 }
     }}
-    const {title} = props
+    const {title, children} = props
     return ( <div className="common">
             <IconButton className="menu-button" imgAlt="orange-menu" 
             whileHover={{
@@ -39,6 +40,7 @@ const CommonPage = (props:iCommonPage) => {
             imgSrc={orange} 
             onClick={handleClick}/>
         <h1 className="title-page">{title}</h1>
+        {children}
     </div> );
 }
  

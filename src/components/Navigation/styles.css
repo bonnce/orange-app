@@ -39,4 +39,5 @@
     user-select: none;
     pointer-events: none;
     font-size: .25em;
+    overflow: hidden;
 }

@@ -10,3 +10,11 @@ export const getTransition = (node:HTMLElement)=> {
 export const timer = (ms:number) => new Promise((resolve)=>{
     setTimeout(resolve, ms);
 })
+
+export const splitUnit = (value:string | number) =>{
+    if(typeof value === 'number')
+    return {value, unit:'px'}
+    const newValue = Number(value.replaceAll(/[A-z]|\W/g,''))
+    const unit = value.replaceAll(/\d/g,'')
+    return {value:newValue, unit}
+}
